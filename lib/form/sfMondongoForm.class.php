@@ -83,5 +83,7 @@ abstract class sfMondongoForm extends BaseForm
     $this->document->fromArray($this->getValues());
 
     $this->document->save();
+
+    return $this->getDocument();
   }
 }
