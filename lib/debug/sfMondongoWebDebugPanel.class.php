@@ -27,6 +27,9 @@
  */
 class sfMondongoWebDebugPanel extends sfWebDebugPanel
 {
+  /**
+   * @see sfWebDebugPanel
+   */
   public function getTitle()
   {
     if ($nb = count($this->getLogs()))
@@ -35,11 +38,17 @@ class sfMondongoWebDebugPanel extends sfWebDebugPanel
     }
   }
 
+  /**
+   * @see sfWebDebugPanel
+   */
   public function getPanelTitle()
   {
     return 'Mondongo Queries';
   }
 
+  /**
+   * @see sfWebDebugPanel
+   */
   public function getPanelContent()
   {
     return '
@@ -50,11 +59,21 @@ class sfMondongoWebDebugPanel extends sfWebDebugPanel
     ';
   }
 
+  /**
+   * Returns the logs.
+   *
+   * @return array The logs.
+   */
   protected function getLogs()
   {
     return sfContext::getInstance()->getConfiguration()->getPluginConfiguration('sfMondongoPlugin')->getLogs();
   }
 
+  /**
+   * Returns the logs list.
+   *
+   * @return array The logs list.
+   */
   protected function getLogsList()
   {
     $logs = array();

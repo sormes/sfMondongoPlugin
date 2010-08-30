@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoBuildModelTask.
+ * Build the Mondongo model from the Yaml schema.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>

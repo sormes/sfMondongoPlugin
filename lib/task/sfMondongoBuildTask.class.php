@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoBuildTask.
+ * Global task for run Mondongo builders.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>

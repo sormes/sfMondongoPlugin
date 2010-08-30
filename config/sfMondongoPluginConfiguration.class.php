@@ -29,6 +29,9 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
 {
   protected $logs = array();
 
+  /**
+   * @see sfPluginConfiguration
+   */
   public function initialize()
   {
     require_once(dirname(__FILE__).'/../lib/vendor/mondongo/lib/autoload/MondongoAutoload.php');
@@ -39,6 +42,15 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
     $this->dispatcher->connect('component.method_not_found', array($this, 'listenToComponentMethodNotFound'));
   }
 
+  /**
+   * Listen to context.load_factories event.
+   *
+   * Initialize the Mondongo.
+   *
+   * @param sfEvent $event The event object.
+   *
+   * @return void
+   */
   public function listenToContextLoadFactories(sfEvent $event)
   {
     $context = $event->getSubject();
@@ -74,23 +86,15 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
     MondongoContainer::setDefault($mondongo);
   }
 
-  public function getLogs()
-  {
-    return $this->logs;
-  }
-
-  public function log(array $log)
-  {
-    $this->dispatcher->notify(new sfEvent('sfMondongo', 'application.log', array('sfMondongo')));
-
-    $this->logs[] = $log;
-  }
-
-  public function listenToDebugWebLoadPanels(sfEvent $event)
-  {
-    $event->getSubject()->setPanel('mondongo', new sfMondongoWebDebugPanel($event->getSubject()));
-  }
-
+  /**
+   * Listen to component.method_not_fount event.
+   *
+   * Returns the Mondongo in actions and components: $this->getMondongo()
+   *
+   * @param sfEvent $event The event.
+   *
+   * @return bool If it returns the Mondongo.
+   */
   public function listenToComponentMethodNotFound(sfEvent $event)
   {
     if ('getMondongo' == $event['method'])
@@ -101,5 +105,41 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
     }
 
     return false;
+  }
+
+  /**
+   * Returns the logs.
+   *
+   * @return array The logs.
+   */
+  public function getLogs()
+  {
+    return $this->logs;
+  }
+
+  /**
+   * Save a mondongo log.
+   *
+   * @param array $log The log.
+   *
+   * @return void
+   */
+  public function log(array $log)
+  {
+    $this->dispatcher->notify(new sfEvent('sfMondongo', 'application.log', array('sfMondongo')));
+
+    $this->logs[] = $log;
+  }
+
+  /**
+   * Listen to debug.web_load_panels event.
+   *
+   * @param sfEvent $event The event.
+   *
+   * @return void
+   */
+  public function listenToDebugWebLoadPanels(sfEvent $event)
+  {
+    $event->getSubject()->setPanel('mondongo', new sfMondongoWebDebugPanel($event->getSubject()));
   }
 }

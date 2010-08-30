@@ -29,6 +29,9 @@ class sfMondongoModelGenerator extends sfGenerator
 {
   protected $data = array();
 
+  /**
+   * @see sfGenerador
+   */
   public function initialize(sfGeneratorManager $generatorManager)
   {
     parent::initialize($generatorManager);
@@ -36,6 +39,9 @@ class sfMondongoModelGenerator extends sfGenerator
     $this->setGeneratorClass('sfMondongoModel');
   }
 
+  /**
+   * @see sfGenerador
+   */
   public function generate($params = array())
   {
     $schema = $this->prepareSchema();

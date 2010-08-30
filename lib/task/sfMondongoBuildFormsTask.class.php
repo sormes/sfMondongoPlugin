@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoBuildFormsTask.
+ * Build the Mondongo forms from the Mondongo model.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>

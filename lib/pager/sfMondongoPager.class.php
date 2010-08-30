@@ -72,16 +72,33 @@ class sfMondongoPager extends sfPager
     return $this->getRepository()->findOne(array_merge($this->findOptions, array('skip' => $offset - 1)));
   }
 
+  /**
+   * Set the find options.
+   *
+   * @param array $findOptions The find options.
+   *
+   * @return void
+   */
   public function setFindOptions(array $findOptions)
   {
     $this->findOptions = $findOptions;
   }
 
+  /**
+   * Returns the find options.
+   *
+   * @return array The find options
+   */
   public function getFindOptions()
   {
     return $this->findOptions;
   }
 
+  /**
+   * Returns the repository of the pager class.
+   *
+   * @return MondongoRepository The repository of the pager class.
+   */
   protected function getRepository()
   {
     return MondongoContainer::getDefault()->getRepository($this->getClass());

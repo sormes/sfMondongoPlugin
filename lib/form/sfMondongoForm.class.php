@@ -29,6 +29,15 @@ abstract class sfMondongoForm extends BaseForm
 {
   protected $document;
 
+  /**
+   * Construct.
+   *
+   * @param MondongoDocumentBaseSpeed $document   The document (optional).
+   * @param array                     $options    An array of options (optional).
+   * @param string                    $CSRFSecret The CSRF Secret (optional).
+   *
+   * @return void
+   */
   public function __construct(MondongoDocumentBaseSpeed $document = null, array $options = array(), $CSRFSecret = null)
   {
     $class = $this->getModelName();
@@ -61,18 +70,40 @@ abstract class sfMondongoForm extends BaseForm
   	parent::__construct($defaults, $options, $CSRFSecret);
   }
 
+  /**
+   * Returns the model name.
+   *
+   * @return string The model name.
+   */
   abstract public function getModelName();
 
+  /**
+   * Returns the document.
+   *
+   * @return MondongoDocumentBaseSpeed The document.
+   */
   public function getDocument()
   {
     return $this->document;
   }
 
+  /**
+   * Returns if the document is new.
+   *
+   * @return bool Returns if the document is new.
+   */
   public function isNew()
   {
     return $this->document->isNew();
   }
 
+  /**
+   * Save the document with the form values.
+   *
+   * @return MondongoDocumentBaseSpeed The document.
+   *
+   * @throws LogicException If the form is not valid.
+   */
   public function save()
   {
     if (!$this->isValid())

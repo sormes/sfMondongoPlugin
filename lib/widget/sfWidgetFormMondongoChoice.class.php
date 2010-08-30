@@ -22,6 +22,8 @@
 /**
  * sfWidgetFormMondongoChoice.
  *
+ * Based on sfWidgetFormDoctrineChoice.
+ *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>
  */
@@ -38,6 +40,13 @@ class sfWidgetFormMondongoChoice extends sfWidgetFormChoice
   }
 
   /**
+   * Options:
+   *
+   *   * model:        the model (required)
+   *   * add_empty:    if add an empty option (false by default)
+   *   * method:       the method to show the document (__toString by default)
+   *   * find_options: the options for the find (empty array by default)
+   *
    * @see sfWidgetFormSelect
    */
   protected function configure($options = array(), $attributes = array())

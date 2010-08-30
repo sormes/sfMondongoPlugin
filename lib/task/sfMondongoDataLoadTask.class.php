@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoDataLoadTask.
+ * Load Mondongo fixtures.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>

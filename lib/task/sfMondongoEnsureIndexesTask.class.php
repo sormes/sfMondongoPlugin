@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoEnsureIndexesTask.
+ * Ensure the indexes.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>

@@ -20,7 +20,7 @@
  */
 
 /**
- * sfMondongoTask.
+ * Base task for Mondongo tasks.
  *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>
@@ -29,6 +29,11 @@ abstract class sfMondongoTask extends sfBaseTask
 {
   protected $mondongo;
 
+  /**
+   * Returns the Mondongo.
+   *
+   * @return Mondongo The Mondongo.
+   */
   protected function getMondongo()
   {
     if (null === $this->mondongo)
@@ -51,6 +56,11 @@ abstract class sfMondongoTask extends sfBaseTask
     return $this->mondongo;
   }
 
+  /**
+   * Returns the repositories of the project.
+   *
+   * @return array The repositories.
+   */
   protected function getRepositories()
   {
     $mondongo = $this->getMondongo();
@@ -64,6 +74,11 @@ abstract class sfMondongoTask extends sfBaseTask
     return $repositories;
   }
 
+  /**
+   * Initialize the definitions of the project.
+   *
+   * @return void
+   */
   protected function initializeDefinitions()
   {
     $finder = sfFinder::type('file')->not_name('*Repository.php')->prune('base');

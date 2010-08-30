@@ -22,12 +22,28 @@
 /**
  * sfValidatorMondongoChoice.
  *
+ * Based on sfValidatorDoctrineChoice.
+ *
  * @package sfMondongoPlugin
  * @author  Pablo Díez Pascual <pablodip@gmail.com>
  */
 class sfValidatorMondongoChoice extends sfValidatorBase
 {
   /**
+   * Options:
+   *
+   *   * model:    the model (required)
+   *   * field:    the field for choice (_id by default)
+   *   * query:    the query for check (empty array by default)
+   *   * multiple: if it's a choice multiple (false by default)
+   *   * min:      the min of documnents to select (null by default)
+   *   * max:      the max of document to select (null by default)
+   *
+   *  Messages:
+   *
+   *   * min: the message when the choices are less that the min option
+   *   * max: the message when the choices are more that the max option
+   *
    * @see sfValidatorBase
    */
   protected function configure($options = array(), $messages = array())

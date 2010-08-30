@@ -29,6 +29,9 @@ class sfMondongoDatabase extends sfDatabase
 {
   protected $mondongoConnection;
 
+  /**
+   * @see sfDatabase
+   */
   public function initialize($parameters = array())
   {
     parent::initialize($parameters);
@@ -75,15 +78,26 @@ class sfMondongoDatabase extends sfDatabase
     $this->mondongoConnection = new MondongoConnection($db);
   }
 
+  /**
+   * Returns the mondongo connection.
+   *
+   * @return MondongoConnection The mondongo connection.
+   */
   public function getMondongoConnection()
   {
     return $this->mondongoConnection;
   }
 
+  /**
+   * @see sfDatabase
+   */
   public function connect()
   {
   }
 
+  /**
+   * @see sfDatabase
+   */
   public function shutdown()
   {
   }
