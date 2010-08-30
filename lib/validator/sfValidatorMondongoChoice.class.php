@@ -34,7 +34,7 @@ class sfValidatorMondongoChoice extends sfValidatorBase
   {
     $this->addRequiredOption('model');
     $this->addOption('field', '_id');
-    $this->addOption('find_query', null);
+    $this->addOption('query', array());
     $this->addOption('multiple', false);
     $this->addOption('min');
     $this->addOption('max');
@@ -48,10 +48,10 @@ class sfValidatorMondongoChoice extends sfValidatorBase
    */
   protected function doClean($value)
   {
-    $mongoCollection = MondongoContainer::getDefault()->getRepository($this->getOption('model'))->getMongoCollection();
+    $repository = MondongoContainer::getDefault()->getRepository($this->getOption('model'));
 
     $field = $this->getOption('field');
-    $query = $this->getOption('find_query');
+    $query = $this->getOption('query');
 
     if ($this->getOption('multiple'))
     {
@@ -85,9 +85,7 @@ class sfValidatorMondongoChoice extends sfValidatorBase
 
       $query[$field] = array('$in' => $queryValue);
 
-      $cursor = $mongoCollection->find($query);
-
-      if ($cursor->count() != $count)
+      if ($repository->count($query) != $count)
       {
         throw new sfValidatorError($this, 'invalid', array('value' => $value));
       }
@@ -96,9 +94,7 @@ class sfValidatorMondongoChoice extends sfValidatorBase
     {
       $query[$field] = new MongoId($value);
 
-      $cursor = $mongoCollection->find($query);
-
-      if (!$cursor->count())
+      if (!$repository->count($query))
       {
         throw new sfValidatorError($this, 'invalid', array('value' => $value));
       }

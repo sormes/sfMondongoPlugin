@@ -45,7 +45,6 @@ class sfWidgetFormMondongoChoice extends sfWidgetFormChoice
     $this->addRequiredOption('model');
     $this->addOption('add_empty', false);
     $this->addOption('method', '__toString');
-    $this->addOption('find_query', array());
     $this->addOption('find_options', array());
 
     parent::configure($options, $attributes);
@@ -67,7 +66,7 @@ class sfWidgetFormMondongoChoice extends sfWidgetFormChoice
     $method  = $this->getOption('method');
     foreach ((array) MondongoContainer::getDefault()
       ->getRepository($this->getOption('model'))
-      ->find($this->getOption('find_query'), $this->getOption('find_options'))
+      ->find($this->getOption('find_options'))
     as $document)
     {
       $choices[(string) $document->getId()] = $document->$method();
