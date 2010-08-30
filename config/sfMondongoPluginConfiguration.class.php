@@ -31,6 +31,9 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
 
   public function initialize()
   {
+    require_once(dirname(__FILE__).'/../lib/vendor/mondongo/lib/autoload/MondongoAutoload.php');
+    MondongoAutoload::register();
+
     $this->dispatcher->connect('context.load_factories', array($this, 'listenToContextLoadFactories'));
 
     $this->dispatcher->connect('component.method_not_found', array($this, 'listenToComponentMethodNotFound'));
