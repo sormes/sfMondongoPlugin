@@ -27,6 +27,9 @@
  */
 class sfMondongoFormGenerator extends sfGenerator
 {
+  /**
+   * @see sfGenerador
+   */
   public function initialize(sfGeneratorManager $generatorManager)
   {
     parent::initialize($generatorManager);
@@ -34,6 +37,9 @@ class sfMondongoFormGenerator extends sfGenerator
     $this->setGeneratorClass('sfMondongoForm');
   }
 
+  /**
+   * @see sfGenerador
+   */
   public function generate($params = array())
   {
     $models = $this->prepareModels();
