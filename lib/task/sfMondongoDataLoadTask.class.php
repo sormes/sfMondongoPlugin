@@ -101,10 +101,9 @@ EOF;
         {
           foreach ($data[$class] as $field => $datum)
           {
-            // referencias
+            // references
             foreach ($references as $name => $reference)
             {
-              // hay referencia
               if (isset($datum[$name]))
               {
                 // many
@@ -118,10 +117,10 @@ EOF;
                       throw new InvalidArgumentException(sprintf('The reference "%s" of the class "%s" does not exists.', $key, $reference['class']));
                     }
 
-                    $datums[] = $documents[$reference['class']][$key];
+                    $datums[] = $documents[$reference['class']][$key]->getId();
                   }
 
-                  $datum[$name] = $datums;
+                  $datum[$reference['field']] = $datums;
                 }
                 // one
                 else
@@ -131,8 +130,10 @@ EOF;
                     throw new InvalidArgumentException(sprintf('The reference "%s" of the class "%s" does not exists.', $name, $reference['class']));
                   }
 
-                  $datum[$name] = $documents[$reference['class']][$datum[$name]];
+                  $datum[$reference['field']] = $documents[$reference['class']][$datum[$name]]->getId();
                 }
+
+                unset($datum[$name]);
               }
             }
 
