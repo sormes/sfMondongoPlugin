@@ -80,7 +80,7 @@ abstract class sfMondongoForm extends BaseForm
       throw new LogicException('Cannot save the sfMondongoForm if it is not valid.');
     }
 
-    $this->document->fromArray($this->getValues());
+    $this->document->fromArray(array_intersect_key($this->getValues(), $this->getDocument()->getDefinition()->getFields()));
 
     $this->document->save();
 
