@@ -99,7 +99,7 @@ EOF;
 
         if ($process)
         {
-          foreach ($data[$class] as $key => $datum)
+          foreach ($data[$class] as $field => $datum)
           {
             // referencias
             foreach ($references as $name => $reference)
@@ -140,7 +140,7 @@ EOF;
             $document->fromArray($datum);
             $document->save();
 
-            $documents[$class][$key] = $document;
+            $documents[$class][$field] = $document;
           }
 
           $change = true;
