@@ -34,7 +34,7 @@ class sfMondongoWebDebugPanel extends sfWebDebugPanel
   {
     if ($nb = count($this->getLogs()))
     {
-      return '<img src="/sfMondongoPlugin/images/web_debug/sf_mondongo.png" alt="Mondongo Queries" /> '.$nb;
+      return '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oGAgsNOiXP4NwAAAG0SURBVDjLbZNNbhNBEIW/Kv8kdpyQSDFgViAhhISUFSyzyIIDcATW3AmJU3AGBBdgh4AVQgoRxvb0TNdj0eOxLbulp261uqtevXplL59cCgAzAJBg52jItL7aXQJfHza7gQxlOHt2H16cQzakfWDWBlgvUxenPzvh0btXVDdTdDHAATdwM9ysI+wHWEEKjt8+p+4HGvVZvHkIIcCQQSmowBFsCjRMIm4ekKdDVk0NEs3FkMX1JaiQdAN3x+wQg56xuLpHWtWkaJCE6qB6OiaO9p7vB4hRj2pkpMjUOZMFWSIfOxr3EEYIFIEEjm11oWWQeqKKTB0ZhUDlXgPvOi4MDPrsioAQTWSqCFIuGhDFGyr5ixatT3z7M4JeFVCV7ClyoS8RVWBV7tRv27HvA18GR9+WJAtWkck5EyFs3uD/goCCNsYBWY3px99EakgKmiajoTP5cofVseWAAt9REEOAN2L2/idpWTPjlMmnW8Zf52hdeIe1BlsymAm5GPyqmH74wevlY04+/yGGjlnrpC30d4Zp40eEyN/vaG4TJmHSoXnEunHuaLSep9CcnJ0y/zs/PM7Afw6S/7yvtG94AAAAAElFTkSuQmCC" alt="Mondongo Queries" /> '.$nb;
     }
   }
 
@@ -53,7 +53,7 @@ class sfMondongoWebDebugPanel extends sfWebDebugPanel
   {
     return '
       <div id="sfWebDebugDatabaseLogs">
-        <h3>Mondongo Version: '.Mondongo::VERSION.'</h3>
+        <h3>Mondongo Version: '.Mondongo\Mondongo::VERSION.'</h3>
         <ol>'.implode("\n", $this->getLogsList()).'</ol>
       </div>
     ';

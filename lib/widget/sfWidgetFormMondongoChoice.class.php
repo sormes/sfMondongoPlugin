@@ -73,7 +73,7 @@ class sfWidgetFormMondongoChoice extends sfWidgetFormChoice
     }
 
     $method  = $this->getOption('method');
-    foreach ((array) MondongoContainer::getDefault()
+    foreach ((array) sfContext::getInstance()->get('mondongo')
       ->getRepository($this->getOption('model'))
       ->find($this->getOption('find_options'))
     as $document)

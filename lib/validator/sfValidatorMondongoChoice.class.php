@@ -64,7 +64,7 @@ class sfValidatorMondongoChoice extends sfValidatorBase
    */
   protected function doClean($value)
   {
-    $repository = MondongoContainer::getDefault()->getRepository($this->getOption('model'));
+    $repository = sfContext::getInstance()->get('mondongo')->getRepository($this->getOption('model'));
 
     $field = $this->getOption('field');
     $query = $this->getOption('query');

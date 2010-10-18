@@ -1,6 +1,3 @@
 [submodule "lib/vendor/mondongo"]
 	path = lib/vendor/mondongo
 	url = git://github.com/mondongo/mondongo.git
-[submodule "lib/vendor/mondongo-extensions"]
-	path = lib/vendor/mondongo-extensions
-	url = git://github.com/mondongo/mondongo-extensions.git

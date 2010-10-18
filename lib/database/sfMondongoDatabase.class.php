@@ -36,46 +36,28 @@ class sfMondongoDatabase extends sfDatabase
   {
     parent::initialize($parameters);
 
+    // server
     if (!$this->hasParameter('server'))
     {
       throw new RuntimeException(sprintf('Connection "%s" without server".', $this->getParameter('name')));
     }
+    $server = $this->getParameter('server');
 
+    // database
+    if (!$this->hasParameter('database'))
+    {
+      throw new RuntimeException(sprintf('Connection "%s" without database.', $this->getParameter('name')));
+    }
+    $database = $this->getParameter('database');
+
+    // options
     $options = array();
     if ($this->hasParameter('persist'))
     {
       $options['persist'] = $this->getParameter('persist');
     }
 
-    $mongo = new Mongo($this->getParameter('server'), $options);
-
-    if (!$this->hasParameter('database'))
-    {
-      throw new RuntimeException(sprintf('Connection "%s" without database.', $this->getParameter('name')));
-    }
-
-    $database = $this->getParameter('database');
-
-    if (is_array($database))
-    {
-      if (!array_key_exists('name', $database))
-      {
-        throw new InvalidArgumentException(sprintf('Database not valid in the connection "%s"', $this->getParameter('name')));
-      }
-
-      $db = $mongo->selectDB($database['name']);
-
-      if (array_key_exists($database['username']) && array_key_exists($database['password']))
-      {
-        $db->authenticate($database['username'], $database['password']);
-      }
-    }
-    else
-    {
-      $db = $mongo->selectDB($database);
-    }
-
-    $this->mondongoConnection = new MondongoConnection($db);
+    $this->mondongoConnection = new Mondongo\Connection($server, $database, $options);
   }
 
   /**

@@ -51,12 +51,94 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array())
   {
-    $this->runTask('mondongo:build-model');
-    $this->runTask('mondongo:build-forms');
+    $this->logSection('mondongo', 'generating classes');
 
+    $mondator = new Mondongo\Mondator\Mondator();
+    $mondator->setConfigClasses($this->prepareConfigClasses());
+    $mondator->setExtensions(array(
+      new Mondongo\Extension\CoreStart(array(
+        'default_document_output'   => sfConfig::get('sf_lib_dir').'/model/mondongo',
+        'default_repository_output' => sfConfig::get('sf_lib_dir').'/model/mondongo',
+      )),
+      new sfMondongoExtensionPluginClasses(),
+      new Mondongo\Extension\CoreEnd(),
+      new Mondongo\Extension\FromToArray(),
+      new Mondongo\Extension\ArrayAccess(),
+      new Mondongo\Extension\PropertyOverloading(),
+      new sfMondongoExtensionForms(array(
+        'output' => sfConfig::get('sf_lib_dir').'/form/mondongo',
+      )),
+    ));
+    $mondator->process();
+
+    // BaseFormMondongo
+    if (!file_exists($file = sfConfig::get('sf_lib_dir').'/form/mondongo/BaseFormMondongo.class.php'))
+    {
+      file_put_contents($file, <<<EOF
+<?php
+
+/**
+ * Mondongo Base Class.
+ */
+abstract class BaseFormMondongo extends sfMondongoForm
+{
+  public function setup()
+  {
+  }
+}
+EOF
+      );
+    }
+
+    // data-load
     if ($options['and-load'])
     {
       $this->runTask('mondongo:data-load');
     }
+  }
+
+  protected function prepareConfigClasses()
+  {
+    $configClasses = array();
+
+    $finder = sfFinder::type('file')->name('*.yml')->sort_by_name()->follow_link();
+
+    // plugins
+    foreach ($this->configuration->getPlugins() as $pluginName)
+    {
+      $plugin = $this->configuration->getPluginConfiguration($pluginName);
+
+      foreach ($finder->in($plugin->getRootDir().'/config/mondongo') as $file)
+      {
+        foreach (sfYaml::load($file) as $className => $configClass)
+        {
+          if (array_key_exists($className, $configClasses))
+          {
+            $configClasses[$className] = sfToolkit::arrayDeepMerge($configClasses[$className], $configClass);
+          }
+          else
+          {
+            $configClasses[$className] = $configClass;
+          }
+
+          if (!array_key_exists('plugin_name', $configClasses[$className]))
+          {
+            $configClasses[$className]['plugin_name'] = $pluginName;
+          }
+          if (!array_key_exists('plugin_dir', $configClasses[$className]))
+          {
+            $configClasses[$className]['plugin_dir'] = $plugin->getRootDir();
+          }
+        }
+      }
+    }
+
+    // project
+    foreach ($finder->in(sfConfig::get('sf_config_dir').'/mondongo') as $file)
+    {
+      $configClasses = sfToolkit::arrayDeepMerge($configClasses, sfYaml::load($file));
+    }
+
+    return $configClasses;
   }
 }

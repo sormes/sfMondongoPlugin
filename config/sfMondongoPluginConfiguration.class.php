@@ -34,8 +34,11 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
-    require_once(dirname(__FILE__).'/../lib/vendor/mondongo/lib/autoload/MondongoAutoload.php');
-    MondongoAutoload::register();
+    require_once(dirname(__FILE__).'/../lib/vendor/mondongo/lib/vendor/symfony/src/Symfony/Component/HttpFoundation/UniversalClassLoader.php');
+
+    $loader = new Symfony\Component\HttpFoundation\UniversalClassLoader();
+    $loader->registerNamespace('Mondongo', sfConfig::get('sf_mondongo_lib_dir', dirname(__FILE__).'/../lib/vendor/mondongo/lib'));
+    $loader->register();
 
     $this->dispatcher->connect('context.load_factories', array($this, 'listenToContextLoadFactories'));
 
@@ -55,7 +58,7 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
   {
     $context = $event->getSubject();
 
-    $mondongo = new Mondongo();
+    $mondongo = new Mondongo\Mondongo();
 
     // databases
     $databaseManager = $context->getDatabaseManager();
@@ -71,7 +74,7 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
     // log
     if (sfConfig::get('sf_logging_enabled'))
     {
-      $mondongo->setLogCallable(array($this, 'log'));
+      $mondongo->setLoggerCallable(array($this, 'log'));
 
       if (sfConfig::get('sf_web_debug'))
       {
@@ -83,7 +86,7 @@ class sfMondongoPluginConfiguration extends sfPluginConfiguration
     $context->set('mondongo', $mondongo);
 
     // container
-    MondongoContainer::setDefault($mondongo);
+    Mondongo\Container::setDefault($mondongo);
   }
 
   /**

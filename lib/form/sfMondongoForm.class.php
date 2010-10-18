@@ -19,6 +19,8 @@
  * along with sfMondongoPlugin. If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Mondongo\Document\Document;
+
 /**
  * sfMondongoForm.
  *
@@ -32,13 +34,13 @@ abstract class sfMondongoForm extends BaseForm
   /**
    * Construct.
    *
-   * @param MondongoDocumentBaseSpeed $document   The document (optional).
-   * @param array                     $options    An array of options (optional).
-   * @param string                    $CSRFSecret The CSRF Secret (optional).
+   * @param Mondongo\Document\Document $document   The document (optional).
+   * @param array                      $options    An array of options (optional).
+   * @param string                     $CSRFSecret The CSRF Secret (optional).
    *
    * @return void
    */
-  public function __construct(MondongoDocumentBaseSpeed $document = null, array $options = array(), $CSRFSecret = null)
+  public function __construct(Document $document = null, array $options = array(), $CSRFSecret = null)
   {
     $class = $this->getModelName();
 
@@ -80,7 +82,7 @@ abstract class sfMondongoForm extends BaseForm
   /**
    * Returns the document.
    *
-   * @return MondongoDocumentBaseSpeed The document.
+   * @return Mondongo\Document\Document The document.
    */
   public function getDocument()
   {
@@ -100,7 +102,7 @@ abstract class sfMondongoForm extends BaseForm
   /**
    * Save the document with the form values.
    *
-   * @return MondongoDocumentBaseSpeed The document.
+   * @return Mondongo\Document\Document The document.
    *
    * @throws LogicException If the form is not valid.
    */

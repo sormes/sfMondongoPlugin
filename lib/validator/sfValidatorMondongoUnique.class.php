@@ -56,7 +56,7 @@ class sfValidatorMondongoUnique extends sfValidatorBase
    */
   protected function doClean($values)
   {
-    $repository = MondongoContainer::getDefault()->getRepository($this->getOption('model'));
+    $repository = sfContext::getInstance()->get('mondongo')->getRepository($this->getOption('model'));
     $fields     = (array) $this->getOption('field');
 
     // case_insensitive

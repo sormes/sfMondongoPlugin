@@ -97,10 +97,10 @@ class sfMondongoPager extends sfPager
   /**
    * Returns the repository of the pager class.
    *
-   * @return MondongoRepository The repository of the pager class.
+   * @return Mondongo\Repository The repository of the pager class.
    */
   protected function getRepository()
   {
-    return MondongoContainer::getDefault()->getRepository($this->getClass());
+    return sfContext::getInstance()->get('mondongo')->getRepository($this->getClass());
   }
 }

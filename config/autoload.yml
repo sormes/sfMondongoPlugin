@@ -4,7 +4,3 @@ autoload:
     path:           <?php echo realpath(dirname(__FILE__).'/../lib')."\n" ?>
     recursive:      true
     exclude:        [vendor]
-
-  sfMondongoPlugin_extensions:
-    name:           sfMondongoPlugin_extensions
-    path:           <?php echo realpath(dirname(__FILE__).'/../lib/vendor/mondongo-extensions/lib')."\n" ?>

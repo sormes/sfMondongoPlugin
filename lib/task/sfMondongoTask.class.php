@@ -29,6 +29,8 @@ abstract class sfMondongoTask extends sfBaseTask
 {
   protected $mondongo;
 
+  protected $repositories;
+
   /**
    * Returns the Mondongo.
    *
@@ -63,31 +65,15 @@ abstract class sfMondongoTask extends sfBaseTask
    */
   protected function getRepositories()
   {
-    $mondongo = $this->getMondongo();
-
-    $repositories = array();
-    foreach (sfFinder::type('file')->name('*Repository.php')->prune('base')->in(sfConfig::get('sf_lib_dir').'/model/mondongo') as $file)
+    if (null === $this->repositories)
     {
-      $repositories[] = $mondongo->getRepository(str_replace('Repository.php', '', basename($file)));
+      $this->repositories = array();
+      foreach (sfFinder::type('file')->name('*Repository.php')->prune('base')->in(sfConfig::get('sf_lib_dir').'/model/mondongo') as $file)
+      {
+        $this->repositories[] = $mondongo->getRepository(str_replace('Repository.php', '', basename($file)));
+      }
     }
 
-    return $repositories;
-  }
-
-  /**
-   * Initialize the definitions of the project.
-   *
-   * @return void
-   */
-  protected function initializeDefinitions()
-  {
-    $finder = sfFinder::type('file')->not_name('*Repository.php')->prune('base');
-
-    foreach ($finder->in(sfConfig::get('sf_lib_dir').'/model/mondongo') as $file)
-    {
-      $name = str_replace('.php', '', basename($file));
-
-      MondongoContainer::getDefinition($name);
-    }
+    return $this->repositories;
   }
 }
