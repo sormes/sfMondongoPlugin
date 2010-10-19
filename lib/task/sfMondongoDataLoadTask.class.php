@@ -56,7 +56,7 @@ EOF;
 
     foreach ($this->getMondongo()->getConnections() as $connection)
     {
-      $connection->getDB()->drop();
+      $connection->getMongoDB()->drop();
     }
 
     $this->logSection('mondongo', 'parsing data');
@@ -75,7 +75,8 @@ EOF;
     $classes = array();
     foreach ($data as $class => $documents)
     {
-      $classes[$class] = $this->getMondongo()->getRepository($class)->getDefinition()->getReferences();
+      $map = call_user_func(array($class.'Map', 'getMap'));
+      $classes[$class] = $map['references'];
     }
 
     $this->logSection('mondongo', 'loading data');

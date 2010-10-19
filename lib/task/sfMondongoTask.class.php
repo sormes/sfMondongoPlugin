@@ -19,6 +19,9 @@
  * along with sfMondongoPlugin. If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Mondongo\Container;
+use Mondongo\Mondongo;
+
 /**
  * Base task for Mondongo tasks.
  *
@@ -52,7 +55,7 @@ abstract class sfMondongoTask extends sfBaseTask
         }
       }
 
-      MondongoContainer::setDefault($this->mondongo);
+      Container::setDefault($this->mondongo);
     }
 
     return $this->mondongo;

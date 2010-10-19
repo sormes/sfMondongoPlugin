@@ -62,9 +62,11 @@ EOF;
       )),
       new sfMondongoExtensionPluginClasses(),
       new Mondongo\Extension\CoreEnd(),
+      new Mondongo\Extension\DocumentDataCamelCaseMap(),
       new Mondongo\Extension\FromToArray(),
       new Mondongo\Extension\ArrayAccess(),
       new Mondongo\Extension\PropertyOverloading(),
+      new Mondongo\Extension\DocumentMap(),
       new sfMondongoExtensionForms(array(
         'output' => sfConfig::get('sf_lib_dir').'/form/mondongo',
       )),
