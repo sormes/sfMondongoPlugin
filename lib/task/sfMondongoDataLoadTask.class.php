@@ -75,8 +75,8 @@ EOF;
     $classes = array();
     foreach ($data as $class => $documents)
     {
-      $map = call_user_func(array($class.'Map', 'getMap'));
-      $classes[$class] = $map['references'];
+      $dataMap = $class::getDataMap();
+      $classes[$class] = $dataMap['references'];
     }
 
     $this->logSection('mondongo', 'loading data');
