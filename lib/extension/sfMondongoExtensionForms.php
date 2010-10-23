@@ -48,20 +48,20 @@ class sfMondongoExtensionForms extends Extension
     /*
      * Definitions.
      */
-    $this->definitions['form'] = $definition = new Definition($this->className.'Form');
-    $definition->setParentClass('Base'.$this->className.'Form');
+    $this->definitions['form'] = $definition = new Definition($this->class.'Form');
+    $definition->setParentClass('Base'.$this->class.'Form');
     $definition->setDocComment(<<<EOF
 /**
- * {$this->className} Form.
+ * {$this->class} Form.
  */
 EOF
     );
 
-    $this->definitions['form_base'] = $definition = new Definition('Base'.$this->className.'Form');
+    $this->definitions['form_base'] = $definition = new Definition('Base'.$this->class.'Form');
     $definition->setParentClass('BaseFormMondongo');
     $definition->setDocComment(<<<EOF
 /**
- * {$this->className} Base Form.
+ * {$this->class} Base Form.
  */
 EOF
     );
@@ -85,13 +85,13 @@ EOF
     if (isset($this->configClass['plugin_name']) && isset($this->configClass['plugin_dir']))
     {
       // definitions
-      $this->definitions['form']->setParentClass('Plugin'.$this->className.'Form');
+      $this->definitions['form']->setParentClass('Plugin'.$this->class.'Form');
 
-      $this->definitions['form_plugin'] = $definition = new Definition('Plugin'.$this->className.'Form');
-      $definition->setParentClass('Base'.$this->className.'Form');
+      $this->definitions['form_plugin'] = $definition = new Definition('Plugin'.$this->class.'Form');
+      $definition->setParentClass('Base'.$this->class.'Form');
       $definition->setDocComment(<<<EOF
 /**
- * {$this->className} Plugin Form.
+ * {$this->class} Plugin Form.
  */
 EOF
       );
@@ -177,7 +177,7 @@ EOF;
     /*
      * nameFormat
      */
-    $nameFormat = Inflector::underscore($this->className);
+    $nameFormat = Inflector::underscore($this->class);
 
     $code = <<<EOF
         \$this->setWidgets(array(
@@ -209,7 +209,7 @@ EOF
   protected function processGetModelNameMethod()
   {
     $code = <<<EOF
-        return '$this->className';
+        return '$this->class';
 EOF;
 
     $method = new Method('public', 'getModelName', '', $code);
