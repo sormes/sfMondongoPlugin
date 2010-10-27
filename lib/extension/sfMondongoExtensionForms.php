@@ -101,7 +101,7 @@ EOF
 
       $this->outputs['form_base']->setDir($this->outputs['form']->getDir().'/Base');
 
-      $this->outputs['form_plugin'] = new Output($this->configClass['plugin_dir'].'/lib/model/mondongo');
+      $this->outputs['form_plugin'] = new Output($this->configClass['plugin_dir'].'/lib/model/form');
     }
   }
 
