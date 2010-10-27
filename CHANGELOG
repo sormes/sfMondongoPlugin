@@ -1,27 +1,21 @@
-05/10/2010 - Versión 0.9.3
---------------------------
+27/10/2010 - Versión 1.0.0 BETA1
+--------------------------------
 
-  * [b8bb528] fixed channel in package.xml
-
-05/09/2010 - Versión 0.9.2
---------------------------
-
-  * [87b0e5d] updated README
-  * [bf30c15] updated Mondongo to 0.9.2 version
-  * [78cf0e7] added mondongo extensions
-  * [6b6e967] added validator unique
-  * [775d149] added more phpdoc
-  * [2f91fcf] added phpdoc
-  * [c669423] added sfMondongoPager
-  * [0e1e855] changed the widget and validator choice to the new mondongo find api
-  * [094034c] fixed load references in mondongo:data-load
-  * [ea2cc4d] fixed variable pollution in foreachs (by ibolmo)
-  * [69f1ba5] added autoload.yml file
-  * [42c2200] use only document fields when save the document of a form, for allow extra fields
-  * [407fbb4] form returns its object/doc at save, like doctrine (by benlumley)
-  * [b3408b4] changed Mondongo to a submodule
-
-03/08/2010 - Versión 0.9.0
---------------------------
-
-  * Initial Version.
+ * [b5dcfa6] updated Mondongo to 1.0.0 BETA1
+ * [a023290] fixed ->getRepositories() method in base task
+ * [15dc0d3] fixed base class on repository plugin model
+ * [d0df084] fixed form plugin output
+ * [9495084] fixed extension PluginClasses
+ * [a2a16d2] fixed the plugin configuration to work w/ mondongo-extensions-extra instead of mondongo-extensions
+ * [be0ca7f] changed submodule from mondongo-extensions to mondongo-extensions-extra
+ * [6c1060f] fixed sfMondongoExtensionForms.php to work w/ the last mondongo commit
+ * [a04c685] updated mondongo
+ * [6015e80] fixed fields check in form save
+ * [d134724] updated mondongo core extensions
+ * [41e7da3] adding mondongo-extensions
+ * [2f5a874] updated mondonto and tasks
+ * [775f704] fixed data-load task
+ * [3b39c99] updated mondongo
+ * [72ff4be] updated mondongo
+ * [b9865d0] updated mondongo
+ * [c27f3a8] changing for mondongo 1.0
