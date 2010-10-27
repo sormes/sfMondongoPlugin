@@ -39,14 +39,14 @@ class sfMondongoExtensionPluginClasses extends Extension
        * Document.
        */
       // definitions
-      $this->definitions['document']->setParentClass('Plugin'.$this->className);
+      $this->definitions['document']->setParentClass('Plugin'.$this->class);
 
-      $this->definitions['document_plugin'] = $definition = new Definition('Plugin'.$this->className);
-      $definition->setParentClass('Base'.$this->className);
+      $this->definitions['document_plugin'] = $definition = new Definition('Plugin'.$this->class);
+      $definition->setParentClass('Base'.$this->class);
       $definition->setIsAbstract(true);
       $definition->setDocComment(<<<EOF
 /**
- * {$this->className} Plugin Document.
+ * {$this->class} Plugin Document.
  */
 EOF
       );
@@ -62,14 +62,14 @@ EOF
        * Repository.
        */
       // definitions
-      $this->definitions['repository']->setParentClass('Plugin'.$this->className);
+      $this->definitions['repository']->setParentClass('Plugin'.$this->class);
 
-      $this->definitions['repository_plugin'] = $definition = new Definition('Plugin'.$this->className.'Repository');
-      $definition->setParentClass('Base'.$this->className.'Repository');
+      $this->definitions['repository_plugin'] = $definition = new Definition('Plugin'.$this->class.'Repository');
+      $definition->setParentClass('Base'.$this->class.'Repository');
       $definition->setIsAbstract(true);
       $definition->setDocComment(<<<EOF
 /**
- * {$this->className} Plugin Repository.
+ * {$this->class} Plugin Repository.
  */
 EOF
       );
