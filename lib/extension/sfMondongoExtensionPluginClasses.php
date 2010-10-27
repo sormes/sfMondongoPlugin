@@ -62,7 +62,7 @@ EOF
        * Repository.
        */
       // definitions
-      $this->definitions['repository']->setParentClass('Plugin'.$this->class);
+      $this->definitions['repository']->setParentClass('Plugin'.$this->class.'Repository');
 
       $this->definitions['repository_plugin'] = $definition = new Definition('Plugin'.$this->class.'Repository');
       $definition->setParentClass('Base'.$this->class.'Repository');
