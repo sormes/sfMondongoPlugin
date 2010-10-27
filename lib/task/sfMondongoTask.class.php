@@ -68,10 +68,12 @@ abstract class sfMondongoTask extends sfBaseTask
    */
   protected function getRepositories()
   {
+    $mondongo = $this->getMondongo();
+
     if (null === $this->repositories)
     {
       $this->repositories = array();
-      foreach (sfFinder::type('file')->name('*Repository.php')->prune('base')->in(sfConfig::get('sf_lib_dir').'/model/mondongo') as $file)
+      foreach (sfFinder::type('file')->name('*Repository.php')->prune('Base')->in(sfConfig::get('sf_lib_dir').'/model/mondongo') as $file)
       {
         $this->repositories[] = $mondongo->getRepository(str_replace('Repository.php', '', basename($file)));
       }
