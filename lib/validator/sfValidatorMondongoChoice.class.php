@@ -94,9 +94,11 @@ class sfValidatorMondongoChoice extends sfValidatorBase
       }
 
       $queryValue = array();
-      foreach ($value as $v)
+      foreach ($value as &$v)
       {
-        $queryValue[] = new MongoId($v);
+        $v = new MongoId($v);
+        $queryValue[] = $v;
+
       }
 
       $query[$field] = array('$in' => $queryValue);
