@@ -99,17 +99,19 @@ class sfMondongoRoute extends sfObjectRoute
     $dataCamelCaseMap = $className::getDataCamelCaseMap();
 
     $parameters = array();
+    
     foreach ($this->getRealVariables() as $variable)
     {
-      try
+
+      if(isset($dataCamelCaseMap[$variable]) && method_exists($className,'get'.$dataCamelCaseMap[$variable]))
       {
         $method = 'get'.$dataCamelCaseMap[$variable];
       }
-      catch (Exception $e)
+      else
       {
         $method = 'get'.sfInflector::camelize($variable);
       }
-
+      
       $parameters[$variable] = $object->$method();
     }
 
